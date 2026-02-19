@@ -24,6 +24,5 @@ public class Progress {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "exercise_id", nullable = false)
-    @JsonIgnore
     private Exercise exercise;
 }
