@@ -6,6 +6,7 @@ import com.youssef.workout_tracker.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,6 +23,9 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest request) {
+        System.out.println("🔵 AuthController - Login request recibido para: " + request.getUsername());
         return ResponseEntity.ok(authService.login(request));
     }
+
+
 }

@@ -42,12 +42,20 @@ public class AuthService {
     }
 
     public AuthResponse login(AuthRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getUsername(),
-                        request.getPassword()
-                )
-        );
+        System.out.println("🟢 AuthService - Intentando autenticar: " + request.getUsername());
+
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.getUsername(),
+                            request.getPassword()
+                    )
+            );
+            System.out.println("✅ AuthService - Autenticación exitosa");
+        } catch (Exception e) {
+            System.out.println("❌ AuthService - Error en autenticación: " + e.getMessage());
+            throw e;
+        }
 
         User user = userRepository.findByUsername(request.getUsername())
                 .orElseThrow();
